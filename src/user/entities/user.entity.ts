@@ -1,5 +1,5 @@
-import { Comment } from "src/comment/entity/comment.entity";
-import { Post } from "src/post/entity/post.entity";
+import { Comment } from "src/comment/entities/comment.entity";
+import { Post } from "src/post/enttities/post.entity";
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
 export enum Position {

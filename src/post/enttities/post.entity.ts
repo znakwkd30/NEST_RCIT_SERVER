@@ -1,5 +1,5 @@
-import { Comment } from "src/comment/entity/comment.entity";
-import { Position, User } from "src/user/entity/user.entity";
+import { Comment } from "src/comment/entities/comment.entity";
+import { Position, User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
