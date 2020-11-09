@@ -38,3 +38,4 @@ ormconfig.json
 
 # Secret
 .env
+.env.development
