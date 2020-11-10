@@ -1,14 +1,14 @@
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService {
     constructor (
-        @InjectRepository(User) private readonly userRepository: Repository<User>
+        @InjectRepository(User) private readonly userRepository: UserRepository
     ) {}
 
     users(): Promise<User[]> {
@@ -16,18 +16,23 @@ export class UserService {
     }
 
     async getUser(id: string): Promise<User> {
-        const user = await this.userRepository.findOne({ where: { id: id }});
+        try {
+            const user = await this.userRepository.findOne({ where: { id: id }});
 
-        if (!user) {
-            return ;
+            if (!user) {
+                return null;
+            }
+    
+            return user;    
+        } catch (error) {
+            console.log(`[getUser] : ${error}`);
+            throw new Error("유저 데이터 얻는중 에러 발생");
         }
-
-        return user;
     }
 
     async register(user: CreateUserDto): Promise<CreateUserDto & User> {
         try {
-            const udata = await this.getUser(user.id);
+            const udata = await this.userRepository.findOneUser(user.id);
 
             if (udata) {
                 throw new Error("이미 존재하는 회원 아이디 입니다.");
@@ -43,6 +48,7 @@ export class UserService {
 
             return newUser;
         } catch (error) {
+            console.log(`[register] : ${error}`)
             throw new Error("회원가입 도중 에러가 발생했습니다.")
         }
     }
