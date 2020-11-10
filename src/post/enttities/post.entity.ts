@@ -1,6 +1,5 @@
-import { Comment } from "src/comment/entities/comment.entity";
 import { Position, User } from "src/user/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Post {
@@ -25,7 +24,4 @@ export class Post {
     @ManyToOne(() => User, { nullable: false })
     @JoinColumn({ name: "uid" })
     uid: string;
-
-    @OneToMany(() => Comment, comment => comment.id)
-    comments: Comment    
 }

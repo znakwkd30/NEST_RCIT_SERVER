@@ -1,4 +1,3 @@
-import { Comment } from "src/comment/entities/comment.entity";
 import { Post } from "src/post/enttities/post.entity";
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
@@ -24,7 +23,4 @@ export class User {
 
     @OneToMany(() => Post, post => post.uid)
     posts: Post;
-
-    @OneToMany(() => Comment, comment => comment.uid)
-    comments: Comment;
 }
