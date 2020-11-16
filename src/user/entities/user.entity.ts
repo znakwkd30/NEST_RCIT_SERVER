@@ -1,4 +1,4 @@
-import { Post } from "src/post/enttities/post.entity";
+import { Post } from "src/post/entities/post.entity";
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
 export enum Position {
