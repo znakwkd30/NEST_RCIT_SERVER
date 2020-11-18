@@ -19,6 +19,25 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('RCIT SERVER Running~');
   });
+
+  describe('Auth', () => {
+    it('로그인 테스트 (기대값: 200)', () => {
+      return request(app.getHttpServer())
+        .post('/auth/login')
+        .send({
+          id: "1234",
+          password: "1234"
+        })
+        .expect(200)
+    })
+
+    it('로그인 테스트 (기대값: 400)', () => {
+      return request(app.getHttpServer())
+        .post('/auth/login')
+        .expect(400)
+    })
+  })
+
 });

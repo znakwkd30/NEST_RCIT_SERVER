@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator";
-import { Position } from "src/user/entities/user.entity";
+import { Position } from "../../user/entities/user.entity";
 
 export class CreatePostDto {
     @IsNotEmpty()

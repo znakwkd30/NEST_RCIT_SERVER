@@ -1,8 +1,8 @@
 import * as jsonwebtoken from 'jsonwebtoken';
 import { Injectable } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
-import { LoginUserDto } from 'src/user/dto/login-user.dto';
-import { LoginResponse } from 'src/user/types/login.response.type';
+import { UserService } from '../user/user.service';
+import { LoginUserDto } from '../user/dto/login-user.dto';
+import { LoginResponse } from '../user/types/login.response.type';
 
 @Injectable()
 export class AuthService {
