@@ -1,4 +1,3 @@
-const { SECRET: secret } = process.env;
-export const jwtConstants = {
-    secret: "secret",
-}
+export const jwtConstants = () => ({
+    secret: process.env.JWT_SECRET,
+});

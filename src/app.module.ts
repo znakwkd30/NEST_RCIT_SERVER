@@ -8,11 +8,16 @@ import { ConfigModule } from '@nestjs/config';
 import { ChatGateway } from './chat/chat.gateway';
 import { AlertGateway } from './alert/alert.gateway';
 import { AlertController } from './alert/alert.controller';
+import { jwtConstants } from './auth/constants';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(), 
-    ConfigModule.forRoot({ envFilePath: [".env", ".env.development"], isGlobal: true }), 
+    ConfigModule.forRoot({
+      envFilePath: [".env", ".env.development"],
+      isGlobal: true,
+      load: [jwtConstants]
+    }), 
     UserModule, 
     PostModule,
     AuthModule
