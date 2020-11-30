@@ -1,9 +1,10 @@
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDTO } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UserRepository } from './user.repository';
+import { UserDTO } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -30,23 +31,29 @@ export class UserService {
         }
     }
 
-    async register(user: CreateUserDto): Promise<CreateUserDto & User> {
+    async register(user: CreateUserDTO): Promise<UserDTO> {
         try {
             const udata = await this.userRepository.findOneUser(user.id);
 
             if (udata) {
                 throw new Error("이미 존재하는 회원 아이디 입니다.");
             }
-            
+
             const bcryptPassword = await bcrypt.hash(user.password, 12);
-            const newUser = await this.userRepository.save({
+
+            await this.userRepository.save({
                 id: user.id,
                 password: bcryptPassword,
                 name: user.name,
                 position: user.position
             });
+            
+            const saveUser: UserDTO = new UserDTO();
+            saveUser.id = user.id;
+            saveUser.name = user.name;
+            saveUser.position = user.position;
 
-            return newUser;
+            return saveUser;
         } catch (error) {
             console.log(`[register] : ${error}`)
             throw new Error("회원가입 도중 에러가 발생했습니다.")

@@ -1,7 +1,7 @@
 import { IsNotEmpty } from "class-validator";
 import { Position } from "../../user/entities/user.entity";
 
-export class CreatePostDto {
+export class CreatePostDTO {
     @IsNotEmpty()
     title: string;
 

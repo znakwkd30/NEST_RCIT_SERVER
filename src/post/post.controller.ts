@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreatePostDto } from './dto/create-post.dto';
+import { CreatePostDTO } from './dto/create-post.dto';
 import { PostService } from './post.service';
 
 @UseGuards(JwtAuthGuard)
@@ -28,7 +28,7 @@ export class PostController {
     }
 
     @Post('create')
-    createPost(@Req() req, @Body() post: CreatePostDto) {
+    createPost(@Req() req, @Body() post: CreatePostDTO) {
         const uid = req.user
         const postData = { uid, ...post };
 

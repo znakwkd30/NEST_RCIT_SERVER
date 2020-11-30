@@ -1,7 +1,7 @@
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 import { Position } from "../entities/user.entity";
 
-export class CreateUserDto {
+export class CreateUserDTO {
     @IsNotEmpty()
     @IsString()
     id: string;
