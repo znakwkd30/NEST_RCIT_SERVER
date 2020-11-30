@@ -4,9 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn']
-  });
+  const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
     .setTitle('RCIT Swagger')
     .setDescription('RCIT API')
@@ -25,6 +23,6 @@ async function bootstrap() {
     })
   );
   
-  await app.listen(3001);
+  await app.listen(3000);
 }
 bootstrap();
