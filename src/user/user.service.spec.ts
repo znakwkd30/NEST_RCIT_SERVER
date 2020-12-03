@@ -4,7 +4,6 @@ import { CreateUserDTO } from './dto/create-user.dto';
 import { UserDTO } from './dto/user.dto';
 import { Position, User } from './entities/user.entity';
 import { UserController } from './user.controller';
-import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 
 class UserMock {
@@ -47,7 +46,7 @@ class UserMock {
     return returnUser;
   }
 
-  public register(user: CreateUserDTO) {
+  public register(user: CreateUserDTO): UserDTO {
     const newUser = new User();
     newUser.id = user.id;
     newUser.name = user.name;
@@ -73,8 +72,8 @@ describe('UserService', () => {
       controllers: [UserController],
       providers: [{
         provide: UserService,
-        useClass: UserMock
-      }, UserRepository],
+        useClass: UserMock,
+      }],
     }).compile();
 
     userService = module.get<UserService>(UserService);
@@ -95,6 +94,7 @@ describe('UserService', () => {
       const user = await userService.getUser("1");
       
       expect(user).toBeInstanceOf(UserDTO);
+      expect(user.id).toEqual("1");
     });
 
     test('should return NotFound Exception', () => {
