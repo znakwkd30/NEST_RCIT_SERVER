@@ -98,7 +98,7 @@ describe('PostService', () => {
     test('should return instance of post', () => {
       const post = postService.getPost(1);
 
-      expect(post).toBeInstanceOf(Array);
+      expect(post).toBeInstanceOf(Object);
     });
 
     test('should return not found exception', () => {
