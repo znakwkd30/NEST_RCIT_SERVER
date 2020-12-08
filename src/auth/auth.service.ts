@@ -12,7 +12,7 @@ export class AuthService {
         private readonly configService: ConfigService,
     ) {}
 
-    async createToken(id) {
+    async createToken(id: string) {
         const secret = this.configService.get('JWT_SECRET');
 
         const payload = {
